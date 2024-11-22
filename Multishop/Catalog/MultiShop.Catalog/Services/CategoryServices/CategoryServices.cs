@@ -21,14 +21,15 @@ namespace MultiShop.Catalog.Services.CategoryServices
             _mapper = mapper;
             
         }
-        public Task CreateCategoryAsync(CreateCategoryDto createCategoryDto)
+        public async Task CreateCategoryAsync(CreateCategoryDto createCategoryDto)
         {
-            throw new NotImplementedException();
+           var value = _mapper.Map<Category>(createCategoryDto);
+            await _categoryCollection.InsertOneAsync(value);
         }
 
-        public Task DeleteCategoryAsync(string id)
+        public async Task DeleteCategoryAsync(string id)
         {
-            throw new NotImplementedException();
+            await _categoryCollection.DeleteOneAsync(id);
         }
 
         public Task<List<ResultCategoryDto>> GetAllCategoyAsync()
