@@ -5,7 +5,7 @@ namespace MultiShop.Catalog.Services.CategoryServices
 {
     public interface ICategoryServices
     {
-        Task<List<ResultCategoryDto>> GetAllCategoyAsync();
+        Task<List<ResultCategoryDto>> GetAllCategoryAsync();
 
         Task CreateCategoryAsync(CreateCategoryDto createCategoryDto);
 
