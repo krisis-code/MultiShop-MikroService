@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MultiShop.Catalog.Entities;
 
-namespace MultiShop.Catalog.Dtos.ProductDetailDtos
+namespace MultiShop.Catalog.Dtos.ProductDtos
 {
     public class UpdateProductDto
     {
