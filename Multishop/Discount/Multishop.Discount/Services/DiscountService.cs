@@ -12,7 +12,7 @@ namespace Multishop.Discount.Services
         {
             _dapperContext = dapperContext;
         }
-        public async Task CreateCoupon(ResultCouponDto coupon)
+        public async Task CreateDiscountCouponAsync(CreateCouponDto coupon)
         {
             string query = "insert into Coupons (Code,Rate,IsActive,ValidDate) values (@code,@rate,@isActive,@validDate)";
             var parameters = new DynamicParameters();
@@ -27,7 +27,7 @@ namespace Multishop.Discount.Services
             }
         }
 
-        public async Task DeleteCoupon(int id)
+        public async Task DeleteDiscountCouponAsync(int id)
         {
             string query = "Delete From Coupons where CouponId = @couponId";
             var parameters = new DynamicParameters();
@@ -38,7 +38,9 @@ namespace Multishop.Discount.Services
             }
         }
 
-        public async Task<List<ResultCouponDto>> GetAllCoupons()
+       
+
+        public async Task<List<ResultCouponDto>> GetAllDiscountCouponsAsync()
         {
             string query = "Select * From Coupons";
             using (var connection = _dapperContext.CreateConnection())
@@ -49,23 +51,24 @@ namespace Multishop.Discount.Services
 
         }
 
-        public async Task<GetByIdCouponDto> GetByIdCoupon(int id)
+        public async Task<GetByIdCouponDto> GetByIdDiscountCouponAsync(int id)
         {
             string query = "Select * From Coupons Where CouponId = @couponId";
             var parameters = new DynamicParameters();
             parameters.Add("@couponId", id);
             using (var connection = _dapperContext.CreateConnection())
             {
-              var values =   await connection.QueryFirstOrDefaultAsync<GetByIdCouponDto>(query);
+              var values =   await connection.QueryFirstOrDefaultAsync<GetByIdCouponDto>(query,parameters);
                 
                 return values;
             }
         }
 
-        public async Task UpdateCoupon(ResultCouponDto coupon)
+        public async Task UpdateDiscountCouponAsync(UpdateCouponDto coupon)
         {
             string query = "update Coupons set Code=@code,Rate=@rate,IsActive=@isActive,ValidDate=@validDate where CouponId = @couponId";
             var parameters = new DynamicParameters();
+            parameters.Add("@couponId", coupon.CouponId);
             parameters.Add("@code", coupon.Code);
             parameters.Add("@rate", coupon.Rate);
             parameters.Add("@isActive", coupon.IsActive);
